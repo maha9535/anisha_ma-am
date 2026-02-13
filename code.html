@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cards</title>
+  </head>
+  <style>
+    
+  body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  h1 {
+    margin-top: 30px;
+    font-size: 32px;
+  }
+
+  #products_me {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+  }
+
+  .card {
+    width: 350px;
+    background:honeydew;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin: 15px 0;
+  }
+
+  .card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    height: 50px;
+    overflow: hidden;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: yellowgreen;
+    margin: 6px 0;
+  }
+
+  .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+  }
+
+  .category {
+    font-size: 12px;
+    background: blue;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  .rating {
+    font-size: 13px;
+    color: tomato;
+  }
+</style>
+ 
+
+    </style>
+    <body>
+      <h1>Data cards</h1>
+      <div id="products_me"></div>
+    
+    <script>
+
+const container = document.getElementById("products_me");
+
+fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      
+
+      function myFunction(item){
+        const card = document.createElement("div");
+
+        card.innerHTML =
+          `<h3>${item.title}</h3>
+          <p>${item.price}</p>
+          <p>${item.description.split(" ").slice(0,20).join(" ")}</p>
+          <p>${item.category}</p>
+          <img src="${item.image}">
+          <p>${item.rating.rate}</p>`;
+
+          card.classList.add("card");
+          container.appendChild(card);
+      }
+      data.forEach(myFunction);
+        
+     });
+      
+      
+     </script>
+     </body>
+</html>
+
